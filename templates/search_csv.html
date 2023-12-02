@@ -1,4 +1,4 @@
-<!-- search_data.html -->
+<!-- search_csv.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +9,14 @@
 <body>
     <h1>Search Results</h1>
 
-    {% if customer_reference_id %}
-        <p>Search term: {{ customer_reference_id }}</p>
-    {% endif %}
-
     {% if results %}
         <table border="1">
             <thead>
                 <tr>
                     <th>Customer Reference ID</th>
                     <th>Item Purchased</th>
-                    <th>Purchase Amount</th>
+                    <th>Purchase Amount (USD)</th>
+                    <th>Date Purchase</th>
                     <th>Review Rating</th>
                     <th>Payment Method</th>
                 </tr>
@@ -29,7 +26,8 @@
                     <tr>
                         <td>{{ result.Customer_Reference_ID }}</td>
                         <td>{{ result.Item_Purchased }}</td>
-                        <td>{{ result.Purchase_Amount }}</td>
+                        <td>{{ result.Purchase_Amount_USD }}</td>
+                        <td>{{ result.Date_Purchase }}</td>
                         <td>{{ result.Review_Rating }}</td>
                         <td>{{ result.Payment_Method }}</td>
                     </tr>
