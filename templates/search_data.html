@@ -1,0 +1,17 @@
+<!-- myapp/templates/search_data.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Data</title>
+</head>
+<body>
+    <h2>Search Data</h2>
+    <form method="get" action="{% url 'search_data' %}">
+        <input type="text" name="q" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+    {% for result in results %}
+        <p>{{ result.name }} - {{ result.description }}</p>
+    {% endfor %}
+</body>
+</html>

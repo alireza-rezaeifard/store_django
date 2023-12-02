@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 import csv
 from .models import Fashion
 from .forms import FashionForm
+from django.db.models import Q
 
 def import_csv(request):
     with open(r'store_django\csv_retails\retails.csv', 'r') as file:
@@ -25,3 +26,11 @@ def add_data(request):
     else:
         form = FashionForm()
     return render(request, 'add_data.html', {'form': form})
+
+def search_data(request):
+    query = request.GET.get('q')
+    if query:
+        results = Fashion.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    else:
+        results = Fashion.objects.all()
+    return render(request, 'search_data.html', {'results': results, 'query': query})
