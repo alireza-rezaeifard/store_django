@@ -1,0 +1,15 @@
+<!-- myapp/templates/add_data.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Data</title>
+</head>
+<body>
+    <h2>Add Data</h2>
+    <form method="post" action="{% url 'add_data' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Data</button>
+    </form>
+</body>
+</html>
