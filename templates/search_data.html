@@ -7,38 +7,12 @@
     <title>Search Results</title>
 </head>
 <body>
+    <!-- اضافه کردن فرم جستجو -->
+    <form method="get" action="{% url 'search_csv' %}">
+        <label for="q">Search:</label>
+        <input type="text" name="q" id="q" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
     <h1>Search Results</h1>
-
-    {% if customer_reference_id %}
-        <p>Search term: {{ customer_reference_id }}</p>
-    {% endif %}
-
-    {% if results %}
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Customer Reference ID</th>
-                    <th>Item Purchased</th>
-                    <th>Purchase Amount</th>
-                    <th>Review Rating</th>
-                    <th>Payment Method</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for result in results %}
-                    <tr>
-                        <td>{{ result.Customer_Reference_ID }}</td>
-                        <td>{{ result.Item_Purchased }}</td>
-                        <td>{{ result.Purchase_Amount }}</td>
-                        <td>{{ result.Review_Rating }}</td>
-                        <td>{{ result.Payment_Method }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No results found.</p>
-    {% endif %}
-
 </body>
 </html>

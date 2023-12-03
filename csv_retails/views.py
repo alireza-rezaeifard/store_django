@@ -33,7 +33,7 @@ def search_csv(request):
         reader = csv.DictReader(file)
         for row in reader:
             # اگر query در هر یک از فیلدها وجود داشته باشد، این ردیف به نتایج اضافه می‌شود.
-            if any(query.lower() in str(value).lower() for value in row.values()):
+            if any(query.lower() in str(row[field]).lower() for field in row.keys()):
                 results.append(row)
 
     return render(request, 'search_csv.html', {'results': results, 'query': query})

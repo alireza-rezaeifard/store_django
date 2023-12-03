@@ -13,23 +13,17 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th>Customer Reference ID</th>
-                    <th>Item Purchased</th>
-                    <th>Purchase Amount (USD)</th>
-                    <th>Date Purchase</th>
-                    <th>Review Rating</th>
-                    <th>Payment Method</th>
+                    {% for field in results.0.keys %}
+                        <th>{{ field }}</th>
+                    {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 {% for result in results %}
                     <tr>
-                        <td>{{ result.Customer_Reference_ID }}</td>
-                        <td>{{ result.Item_Purchased }}</td>
-                        <td>{{ result.Purchase_Amount_USD }}</td>
-                        <td>{{ result.Date_Purchase }}</td>
-                        <td>{{ result.Review_Rating }}</td>
-                        <td>{{ result.Payment_Method }}</td>
+                        {% for value in result.values %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
                     </tr>
                 {% endfor %}
             </tbody>
