@@ -18,6 +18,7 @@ def import_csv(request):
                 Customer_Reference_ID=row['Customer_Reference_ID'],
                 Item_Purchased=row['Item_Purchased'],
                 Purchase_Amount=row['Purchase_Amount'],
+                Date_Purchase=row['Date Purchase'],
                 Review_Rating=row['Review_Rating'],
                 Payment_Method=row['Payment_Method']
             )
@@ -52,6 +53,7 @@ def add_data(request):
                     form.cleaned_data['Customer_Reference_ID'],
                     form.cleaned_data['Item_Purchased'],
                     form.cleaned_data['Purchase_Amount'],
+                    form.cleaned_data['Date_Purchase'],
                     form.cleaned_data['Review_Rating'],
                     form.cleaned_data['Payment_Method'],
                 ])

@@ -3,6 +3,7 @@ from django.db import models
 class Fashion(models.Model):
     Customer_Reference_ID = models.IntegerField(primary_key=True, unique=True)
     Item_Purchased = models.CharField(max_length=100)
+    Date_Purchase = models.DateField(null=True)  # اضافه کردن فیلد Date_Purchase
     Purchase_Amount = models.FloatField()
     Review_Rating = models.FloatField()
     Payment_Method = models.CharField(max_length=255)

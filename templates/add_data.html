@@ -1,15 +1,20 @@
 <!-- myapp/templates/add_data.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Data</title>
 </head>
 <body>
-    <h2>Add Data</h2>
+    <h1>Add Data</h1>
+    <input type="date" name="Date_Purchase" required>
+
     <form method="post" action="{% url 'add_data' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add Data</button>
+        <button type="submit">Submit</button>
     </form>
+
 </body>
 </html>
