@@ -3401,3 +3401,4 @@ Customer Reference ID,Item Purchased,Purchase Amount (USD),Date Purchase,Review 
 4001,Backpack,115,3/22/2023,1.4,Cash
 23,2,23.0,4.0,MONEY
 22,22,22.0,3.0,MONEY
+3,apple,34.0,2023-12-05,2.0,paypal
