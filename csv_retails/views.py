@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 import csv
 from .models import Fashion
-from .forms import FashionForm
+from .forms import FashionForm, SearchForm
 from django.db.models import Q
 from django.conf import settings
 import os
@@ -64,22 +64,27 @@ def add_data(request):
     return render(request, 'add_data.html', {'form': form})
 
 def search_data(request):
-    customer_reference_id = request.GET.get('customer_reference_id')
+    form = SearchForm(request.GET)
 
-    csv_file_path = os.path.join(settings.BASE_DIR, 'csv_retails', 'retails.csv')
+    if form.is_valid():
+        search_field = form.cleaned_data.get('search_field')
+        search_term = form.cleaned_data.get('search_term')
 
-    if customer_reference_id:
+        csv_file_path = os.path.join(settings.BASE_DIR, 'csv_retails', 'retails.csv')
         results = []
+
         with open(csv_file_path, 'r') as file:
             reader = csv.DictReader(file)
+
             for row in reader:
-                if row['Customer_Reference_ID'] == customer_reference_id:
+                # اگر هیچ فیلدی انتخاب نشده باشد، تمام ردیف‌ها را نشان بده
+                if not search_field:
                     results.append(row)
-    else:
-        results = []
-        with open(csv_file_path, 'r') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                results.append(row)
+                # در غیر این صورت فیلتر کن
+                elif row.get(search_field) == search_term:
+                    results.append(row)
 
-    return render(request, 'search_data.html', {'results': results, 'customer_reference_id': customer_reference_id})
+        return render(request, 'search_data.html', {'form': form, 'results': results})
+
+    return render(request, 'search_data.html', {'form': form, 'results': []})
+

@@ -9,6 +9,8 @@
 <body>
     <!-- اضافه کردن فرم جستجو -->
     <form method="get" action="{% url 'search_csv' %}">
+        <label for="search_field">Search by:</label>
+        {{ form.search_field }}
         <label for="q">Search:</label>
         <input type="text" name="q" id="q" value="{{ query }}">
         <button type="submit">Search</button>

@@ -7,6 +7,8 @@ class Fashion(models.Model):
     Purchase_Amount = models.FloatField()
     Review_Rating = models.FloatField()
     Payment_Method = models.CharField(max_length=255)
+    
 
     def __str__(self):
         return f"{self.Customer_Reference_ID} - {self.Item_Purchased}"
+    
