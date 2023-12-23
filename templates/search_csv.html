@@ -5,32 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
+
+    <!-- اضافه کردن Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Search Results</h1>
-
-    {% if results %}
-        <table border="1">
-            <thead>
-                <tr>
-                    {% for field in results.0.keys %}
-                        <th>{{ field }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for result in results %}
+    <div class="container">
+        <h1>Search Results</h1>
+    
+        {% if results %}
+            <table class="table">
+                <thead>
                     <tr>
-                        {% for value in result.values %}
-                            <td>{{ value }}</td>
+                        {% for field in results.0.keys %}
+                            <th>{{ field }}</th>
                         {% endfor %}
+                        <!-- افزودن ستون‌های "Edit" و "Delete" -->
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No results found.</p>
-    {% endif %}
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            {% for value in result.values %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                            <!-- افزودن دکمه‌های "Edit" و "Delete" -->
+                            <td><button class="btn btn-success">Edit</button></td>
+                            <td><button class="btn btn-danger">Delete</button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+            <!-- افزودن لینک‌های صفحه‌بندی -->
+            <div class="pagination">
+                <span class="step-links">
+                    {% if results.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ results.previous_page_number }}">previous</a>
+                    {% endif %}
+    
+                    <span class="current">
+                        صفحه {{ results.number }} از {{ results.paginator.num_pages }}.
+                    </span>
+    
+                    {% if results.has_next %}
+                        <a href="?page={{ results.next_page_number }}">next</a>
+                        <a href="?page={{ results.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
 
+    <!-- اضافه کردن Bootstrap JS و Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-Uo3v5l+UksUiBZ41WpfEXAdpaxlJH0VcSZj3dAqSeFz6LqtCCFp9Z2dJZIs5l9z" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

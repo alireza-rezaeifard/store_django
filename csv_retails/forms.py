@@ -19,5 +19,11 @@ class SearchForm(forms.Form):
         # ادامه...
     ]
 
+
+
     search_field = forms.ChoiceField(choices=[('', 'Select a field')] + SEARCH_CHOICES, required=False)
     search_term = forms.CharField(max_length=255, required=False)
+
+
+class DeleteRowForm(forms.Form):
+    row_id = forms.IntegerField(widget=forms.HiddenInput())

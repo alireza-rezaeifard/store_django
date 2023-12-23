@@ -5,6 +5,8 @@ from .forms import FashionForm, SearchForm
 from django.db.models import Q
 from django.conf import settings
 import os
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import get_object_or_404
 
 
 
@@ -33,9 +35,23 @@ def search_csv(request):
     with open(csv_file_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            # اگر query در هر یک از فیلدها وجود داشته باشد، این ردیف به نتایج اضافه می‌شود.
             if any(query.lower() in str(row[field]).lower() for field in row.keys()):
                 results.append(row)
+
+    # ایجاد یک شیء Paginator با 50 ردیف در هر صفحه
+    paginator = Paginator(results, 50)
+
+    # درخواست مربوط به صفحه را دریافت
+    page = request.GET.get('page')
+
+    try:
+        results = paginator.page(page)
+    except PageNotAnInteger:
+        # اگر شماره صفحه عدد نباشد، نشان دادن اولین صفحه
+        results = paginator.page(1)
+    except EmptyPage:
+        # اگر شماره صفحه بیشتر از تعداد صفحات باشد، نشان دادن آخرین صفحه
+        results = paginator.page(paginator.num_pages)
 
     return render(request, 'search_csv.html', {'results': results, 'query': query})
 
@@ -87,4 +103,10 @@ def search_data(request):
         return render(request, 'search_data.html', {'form': form, 'results': results})
 
     return render(request, 'search_data.html', {'form': form, 'results': []})
+
+
+
+def index(request):
+    return render(request, 'index.html')
+
 
