@@ -1,26 +1,29 @@
 <!-- delete_confirmation.html -->
+{% extends 'layout.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Confirmation</title>
-
     <!-- اضافه کردن Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
         <h1>Delete Confirmation</h1>
-    
         <p>آیا از حذف این رکورد اطمینان دارید؟</p>
-        
         <form method="post" action="{% url 'delete_record' result.id %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">حذف</button>
             <a href="{% url 'search_results' %}" class="btn btn-secondary">لغو</a>
         </form>
     </div>
-
     <!-- اضافه کردن Bootstrap JS و Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-Uo3v5l+UksUiBZ41WpfEXAdpaxlJH0VcSZj3dAqSeFz6LqtCCFp9Z2dJZIs5l9z" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
+{% endblock %}

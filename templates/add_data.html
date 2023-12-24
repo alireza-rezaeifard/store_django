@@ -10,8 +10,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="bg-light">
+
     <div class="container mt-5">
         <h1 class="mb-4">Add Data</h1>
+
+        {% if form_submitted %}
+            <div class="alert alert-success" role="alert">
+                Data has been successfully submitted!
+            </div>
+        {% endif %}
 
         <form method="post" action="{% url 'add_data' %}" class="needs-validation" novalidate>
             {% csrf_token %}
@@ -19,6 +26,13 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container text-center">
+            <p>Back to <a href="{% url 'index' %}">Home</a></p>
+        </div>
+    </footer>
 
     <!-- اضافه کردن Bootstrap JS و Popper.js -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

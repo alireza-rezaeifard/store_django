@@ -1,0 +1,40 @@
+<!-- base.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}mabahes project {% endblock %}</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <a href="#">
+                <img src="{% static 'images/logo.png'%}">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="link"><a href="{% url 'add_data' %}">Add data</a></li>
+            <li id="link1" class="link"><a href="{% url 'search_data' %}">Search</a></li>
+        </ul>
+        <button class="btn">Hello</button>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+
+    <script src="{% static 'js/script.js'%}"></script>
+</body>
+
+</html>

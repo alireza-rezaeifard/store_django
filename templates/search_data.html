@@ -1,35 +1,47 @@
+{% extends 'layout.html' %}
+
 <!-- search_data.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
 
-    <!-- اضافه کردن استایل‌های CSS -->
+    <!-- Add your CSS styles here -->
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         form {
             margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         label {
-            margin-right: 10px;
+            margin-bottom: 10px;
         }
 
         input[type="text"] {
-            padding: 5px;
-            width: 200px;
+            padding: 10px;
+            width: 300px;
+            margin-bottom: 10px;
         }
 
         button {
-            padding: 8px;
+            padding: 12px;
             background-color: #007bff;
             color: #fff;
             cursor: pointer;
@@ -58,38 +70,20 @@
     </style>
 </head>
 <body>
-    <!-- اضافه کردن فرم جستجو -->
-    <form method="get" action="{% url 'search_csv' %}">
-        <label for="search_field">Search by:</label>
-        {{ form.search_field }}
-        <label for="q">Search:</label>
-        <input type="text" name="q" id="q" value="{{ query }}">
+    {% block content %}
+    <!-- Add search form -->
+    <form method="get" action="{% url 'search_csv' %}" style="display: flex; flex-direction: row;">
+        <div style="display: flex; flex-direction: row; align-items: center; margin-right: 10px;">
+            <label for="search_field">Search by:</label>
+            {{ form.search_field }}
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <label for="q">Search:</label>
+            <input type="text" name="q" id="q" value="{{ query }}">
+        </div>
         <button type="submit">Search</button>
     </form>
-
-    <h1>Search Results</h1>
-
-    {% if results %}
-        <table>
-            <thead>
-                <tr>
-                    {% for field in results.0.keys %}
-                        <th>{{ field }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for result in results %}
-                    <tr>
-                        {% for value in result.values %}
-                            <td>{{ value }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No results found.</p>
-    {% endif %}
+    {% endblock %}
 </body>
 </html>
+
