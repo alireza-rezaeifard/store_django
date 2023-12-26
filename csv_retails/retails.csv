@@ -3410,3 +3410,5 @@ Customer Reference ID,Item Purchased,Purchase Amount (USD),Date Purchase,Review 
 11,apple,11.0,2023-12-12,5.0,MONEY
 8,bananna,11.0,2023-12-06,9.0,MONEY
 5,bandari,4.0,2023-12-01,3.0,pool
+19,apple,8.0,2023-12-08,9.0,paypal
+37,apple,9.0,2023-12-14,10.0,MONEY

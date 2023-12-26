@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, reverse
 import csv
 from .models import Fashion
 from .forms import FashionForm, SearchForm
@@ -112,25 +112,4 @@ def search_data(request):
 def index(request):
     return render(request, 'index.html')
 
-results = [
-    {'Customer Reference ID': 1, 'Item Purchased': 'Product A', 'Purchase Amount (USD)': 50.0, 'Date Purchase': '2023-01-01', 'Review Rating': 4, 'Payment Method': 'Credit Card'},
-    {'Customer Reference ID': 2, 'Item Purchased': 'Product B', 'Purchase Amount (USD)': 75.0, 'Date Purchase': '2023-01-05', 'Review Rating': 5, 'Payment Method': 'PayPal'},
-    # ...
-]
-
-def delete_confirmation_view(request, result_id):
-    # فرض کنید results یک لیست از دیکشنری‌ها باشد
-    result = next((item for item in results if item['Customer Reference ID'] == result_id), None)
-    return render(request, 'delete_confirmation.html', {'result': result})
-
-def delete_record_view(request, result_id):
-    # فرض کنید results یک لیست از دیکشنری‌ها باشد
-    result = next((item for item in results if item['Customer Reference ID'] == result_id), None)
-
-    if request.method == 'POST':
-        # انجام عملیات حذف رکورد
-        results.remove(result)
-        return redirect('search_results')  # جایگزین کنید 'search_results' با نام مسیر مربوط به نمای جستجو
-
-    return redirect('delete_confirmation', result_id=result_id)
 
